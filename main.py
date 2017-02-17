@@ -14,6 +14,12 @@ class BlogPost(db.Model):
     post = db.StringProperty(required = True)
     created = db.DateTimeProperty(auto_now_add = True)
 
+def get_posts(limit, offset):
+    # TODO: query the database for posts, and return them
+    blog_posts = db.GqlQuery("""Select * FROM BlogPost ORDER BY created DESC LIMIT """
+    +limit+""" OFFSET """ +offset)
+
+
 class Index(webapp2.RequestHandler):
     def get(self):
         self.redirect("/blog")
