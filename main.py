@@ -50,11 +50,11 @@ class NewPost(webapp2.RequestHandler):
             blog.put()
             blog_id = blog.key().id()
             self.redirect("/blog/%s"% blog_id)
-        else:
-            error = "You must enter both a title and post content."
-            t = jinja_env.get_template("newpost.html")
-            content = t.render(error = error)
-            self.response.write(content)
+
+        error = "You must enter both a title and post content."
+        t = jinja_env.get_template("newpost.html")
+        content = t.render(title = title, post = post, error = error)
+        self.response.write(content)
 
 class ViewPostHandler(webapp2.RequestHandler):
     def get(self, id):
